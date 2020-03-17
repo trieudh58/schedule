@@ -5,8 +5,27 @@ import { DUPLICATE_SCHEDULER, NO_SCHEDULER_FOUND } from './schedule.messages';
 @Injectable()
 export class SchedulerRegistry {
   private readonly cronJobs = new Map<string, CronJob>();
+  private readonly cronJobNamespaces = new Map<string, string>();
   private readonly timeouts = new Map<string, any>();
   private readonly intervals = new Map<string, any>();
+
+  runAllCronJobs(namespace = 'global') {
+    const allJobs = this.getCronJobs();
+    allJobs.forEach((job, jobName) => {
+      if (this.cronJobNamespaces.get(jobName) === namespace) {
+        job.start();
+      }
+    });
+  }
+
+  stopAllCronJobs(namespace = 'global') {
+    const allJobs = this.getCronJobs();
+    allJobs.forEach((job, jobName) => {
+      if (this.cronJobNamespaces.get(jobName) === namespace) {
+        job.stop();
+      }
+    });
+  }
 
   getCronJob(name: string) {
     const ref = this.cronJobs.get(name);
@@ -32,12 +51,13 @@ export class SchedulerRegistry {
     return ref;
   }
 
-  addCronJob(name: string, job: CronJob) {
+  addCronJob(name: string, job: CronJob, namespace = 'global') {
     const ref = this.cronJobs.get(name);
     if (ref) {
       throw new Error(DUPLICATE_SCHEDULER('Cron Job', name));
     }
     this.cronJobs.set(name, job);
+    this.cronJobNamespaces.set(name, namespace);
   }
 
   addInterval<T = any>(name: string, intervalId: T) {
@@ -64,6 +84,7 @@ export class SchedulerRegistry {
     const cronJob = this.getCronJob(name);
     cronJob.stop();
     this.cronJobs.delete(name);
+    this.cronJobNamespaces.delete(name);
   }
 
   getIntervals(): string[] {

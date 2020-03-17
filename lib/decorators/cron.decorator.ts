@@ -35,6 +35,12 @@ export interface CronOptions {
    * Otherwise, call job.start() to start it manually.
    */
   autoStart?: boolean;
+
+  /**
+   * Namespace of the cron job. Useful for grouping and distinguishing job types or scopes.
+   * Default to 'global'
+   */
+  namespace?: string;
 }
 
 /**
@@ -47,6 +53,7 @@ export function Cron(
   options: CronOptions = {},
 ): MethodDecorator {
   const name = options && options.name;
+  options.namespace = options.namespace || 'global';
   return applyDecorators(
     SetMetadata(SCHEDULE_CRON_OPTIONS, {
       ...options,

@@ -83,7 +83,7 @@ export class SchedulerOrchestrator
       }
 
       this.cronJobs[key].ref = cronJob;
-      this.schedulerRegistry.addCronJob(key, cronJob);
+      this.schedulerRegistry.addCronJob(key, cronJob, options.namespace);
     });
   }
 

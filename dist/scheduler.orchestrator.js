@@ -57,7 +57,7 @@ let SchedulerOrchestrator = class SchedulerOrchestrator {
                 cronJob.start();
             }
             this.cronJobs[key].ref = cronJob;
-            this.schedulerRegistry.addCronJob(key, cronJob);
+            this.schedulerRegistry.addCronJob(key, cronJob, options.namespace);
         });
     }
     clearTimeouts() {

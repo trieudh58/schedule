@@ -11,8 +11,25 @@ const schedule_messages_1 = require("./schedule.messages");
 let SchedulerRegistry = class SchedulerRegistry {
     constructor() {
         this.cronJobs = new Map();
+        this.cronJobNamespaces = new Map();
         this.timeouts = new Map();
         this.intervals = new Map();
+    }
+    runAllCronJobs(namespace = 'global') {
+        const allJobs = this.getCronJobs();
+        allJobs.forEach((job, jobName) => {
+            if (this.cronJobNamespaces.get(jobName) === namespace) {
+                job.start();
+            }
+        });
+    }
+    stopAllCronJobs(namespace = 'global') {
+        const allJobs = this.getCronJobs();
+        allJobs.forEach((job, jobName) => {
+            if (this.cronJobNamespaces.get(jobName) === namespace) {
+                job.stop();
+            }
+        });
     }
     getCronJob(name) {
         const ref = this.cronJobs.get(name);
@@ -35,12 +52,13 @@ let SchedulerRegistry = class SchedulerRegistry {
         }
         return ref;
     }
-    addCronJob(name, job) {
+    addCronJob(name, job, namespace = 'global') {
         const ref = this.cronJobs.get(name);
         if (ref) {
             throw new Error(schedule_messages_1.DUPLICATE_SCHEDULER('Cron Job', name));
         }
         this.cronJobs.set(name, job);
+        this.cronJobNamespaces.set(name, namespace);
     }
     addInterval(name, intervalId) {
         const ref = this.intervals.get(name);
@@ -63,6 +81,7 @@ let SchedulerRegistry = class SchedulerRegistry {
         const cronJob = this.getCronJob(name);
         cronJob.stop();
         this.cronJobs.delete(name);
+        this.cronJobNamespaces.delete(name);
     }
     getIntervals() {
         return [...this.intervals.keys()];
