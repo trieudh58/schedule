@@ -27,6 +27,16 @@ export class SchedulerRegistry {
     });
   }
 
+  getCronJobNames(namespace = 'global') {
+    const names: string[] = [];
+    this.cronJobNamespaces.forEach((v, k) => {
+      if (v === namespace) {
+        names.push(k);
+      }
+    });
+    return names;
+  }
+
   getCronJob(name: string) {
     const ref = this.cronJobs.get(name);
     if (!ref) {

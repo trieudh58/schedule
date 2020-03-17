@@ -6,6 +6,7 @@ export declare class SchedulerRegistry {
   private readonly intervals;
   runAllCronJobs(namespace?: string): void;
   stopAllCronJobs(namespace?: string): void;
+  getCronJobNames(namespace?: string): string[];
   getCronJob(name: string): CronJob;
   getInterval(name: string): any;
   getTimeout(name: string): any;

@@ -31,6 +31,15 @@ let SchedulerRegistry = class SchedulerRegistry {
             }
         });
     }
+    getCronJobNames(namespace = 'global') {
+        const names = [];
+        this.cronJobNamespaces.forEach((v, k) => {
+            if (v === namespace) {
+                names.push(k);
+            }
+        });
+        return names;
+    }
     getCronJob(name) {
         const ref = this.cronJobs.get(name);
         if (!ref) {
