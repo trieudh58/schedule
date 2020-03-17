@@ -53,7 +53,9 @@ let SchedulerOrchestrator = class SchedulerOrchestrator {
         cronKeys.forEach(key => {
             const { options, target } = this.cronJobs[key];
             const cronJob = new cron_1.CronJob(options.cronTime, target, undefined, false, options.timeZone, undefined, false, options.utcOffset, options.unrefTimeout);
-            cronJob.start();
+            if (options.autoStart) {
+                cronJob.start();
+            }
             this.cronJobs[key].ref = cronJob;
             this.schedulerRegistry.addCronJob(key, cronJob);
         });

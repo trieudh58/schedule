@@ -78,7 +78,9 @@ export class SchedulerOrchestrator
         options.utcOffset,
         options.unrefTimeout,
       );
-      cronJob.start();
+      if (options.autoStart) {
+        cronJob.start();
+      }
 
       this.cronJobs[key].ref = cronJob;
       this.schedulerRegistry.addCronJob(key, cronJob);
