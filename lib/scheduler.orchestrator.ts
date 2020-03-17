@@ -23,11 +23,11 @@ type CronJobOptions = TargetHost & CronOptionsHost & RefHost<CronJob>;
 @Injectable()
 export class SchedulerOrchestrator
   implements OnApplicationBootstrap, OnApplicationShutdown {
-  private readonly cronJobs: Record<string, CronJobOptions> = {};
-  private readonly timeouts: Record<string, TimeoutOptions> = {};
-  private readonly intervals: Record<string, IntervalOptions> = {};
+  protected readonly cronJobs: Record<string, CronJobOptions> = {};
+  protected readonly timeouts: Record<string, TimeoutOptions> = {};
+  protected readonly intervals: Record<string, IntervalOptions> = {};
 
-  constructor(private readonly schedulerRegistry: SchedulerRegistry) {}
+  constructor(protected readonly schedulerRegistry: SchedulerRegistry) {}
 
   onApplicationBootstrap() {
     this.mountTimeouts();
