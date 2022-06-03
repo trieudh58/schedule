@@ -1,0 +1,102 @@
+{
+  "_from": "https://github.com/trieudh58/schedule/tarball/master",
+  "_id": "@nestjs/schedule@0.3.0",
+  "_inBundle": false,
+  "_integrity": "sha512-/R76TvUyrca/ZkFYzkbGiUKZlpnPFSJMb6Pinf7qGSFdFG8xFeSJPSpPMjiBCutw5UMGD4sfgzh6Rxubsz+8eg==",
+  "_location": "/@nestjs/schedule",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "@nestjs/schedule@https://github.com/trieudh58/schedule/tarball/master",
+    "name": "@nestjs/schedule",
+    "escapedName": "@nestjs%2fschedule",
+    "scope": "@nestjs",
+    "rawSpec": "https://github.com/trieudh58/schedule/tarball/master",
+    "saveSpec": "https://github.com/trieudh58/schedule/tarball/master",
+    "fetchSpec": "https://github.com/trieudh58/schedule/tarball/master"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://github.com/trieudh58/schedule/tarball/master",
+  "_shasum": "d9aff5e0e59b703d1cab05d16706d2dfb7b631b3",
+  "_spec": "@nestjs/schedule@https://github.com/trieudh58/schedule/tarball/master",
+  "_where": "C:\\Users\\dangt\\Desktop\\be-rework",
+  "author": {
+    "name": "Kamil Mysliwiec"
+  },
+  "bugs": {
+    "url": "https://github.com/nestjs/schedule/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "cron": "1.8.2",
+    "uuid": "7.0.2"
+  },
+  "deprecated": false,
+  "description": "Nest - modern, fast, powerful node.js web framework (@schedule)",
+  "devDependencies": {
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-angular": "8.3.4",
+    "@nestjs/common": "7.0.2",
+    "@nestjs/core": "7.0.2",
+    "@nestjs/platform-express": "7.0.2",
+    "@nestjs/testing": "7.0.2",
+    "@types/cron": "1.7.2",
+    "@types/jest": "25.1.4",
+    "@types/node": "7.10.8",
+    "@types/sinon": "7.5.2",
+    "@types/uuid": "7.0.0",
+    "@typescript-eslint/eslint-plugin": "2.24.0",
+    "@typescript-eslint/parser": "2.24.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-plugin-import": "2.20.1",
+    "husky": "4.2.3",
+    "jest": "25.1.0",
+    "lint-staged": "10.0.8",
+    "prettier": "1.19.1",
+    "reflect-metadata": "0.1.13",
+    "release-it": "13.1.1",
+    "rimraf": "3.0.2",
+    "rxjs": "6.5.4",
+    "sinon": "9.0.1",
+    "ts-jest": "24.3.0",
+    "typescript": "3.8.3"
+  },
+  "homepage": "https://github.com/nestjs/schedule#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write"
+    ]
+  },
+  "name": "@nestjs/schedule",
+  "peerDependencies": {
+    "@nestjs/common": "^6.10.11 || ^7.0.0",
+    "reflect-metadata": "^0.1.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestjs/schedule.git"
+  },
+  "scripts": {
+    "build": "rimraf -rf dist && tsc -p tsconfig.json",
+    "format": "prettier **/**/*.ts --ignore-path ./.prettierignore --write",
+    "lint": "eslint 'lib/**/*.ts' --fix",
+    "prepublish:next": "npm run build",
+    "prepublish:npm": "npm run build",
+    "prerelease": "npm run build",
+    "publish:next": "npm publish --access public --tag next",
+    "publish:npm": "npm publish --access public",
+    "release": "release-it",
+    "test:integration": "jest --config ./tests/jest-e2e.json --runInBand"
+  },
+  "url": "https://github.com/nestjs/schedule#readme",
+  "version": "0.3.0"
+}
