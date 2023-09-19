@@ -76,7 +76,7 @@
       "prettier --write"
     ]
   },
-  "name": "@nestjs/schedule",
+  "name": "@trieudh58/nestjs-schedule",
   "peerDependencies": {
     "@nestjs/common": "^6.10.11 || ^7.0.0",
     "reflect-metadata": "^0.1.12"
